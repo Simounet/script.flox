@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <category label="32001">
+        <setting label="32009" type="text" id="floxUsername" default="" />
+        <setting label="32010" type="text" id="floxPassword" option="hidden" default="" />
+        <setting label="32012" type="text" id="floxUrl" default="https://" />
+    </category>
+</settings>
