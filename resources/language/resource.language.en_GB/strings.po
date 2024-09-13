@@ -16,14 +16,10 @@ msgctxt "#32001"
 msgid "General"
 msgstr "General"
 
-msgctxt "#32009"
-msgid "Username"
-msgstr "Username"
-
-msgctxt "#32010"
-msgid "Password"
-msgstr "Password"
-
 msgctxt "#32012"
 msgid "Flox url"
 msgstr "Flox url"
+
+msgctxt "#32013"
+msgid "Flox API key"
+msgstr "Flox API key"

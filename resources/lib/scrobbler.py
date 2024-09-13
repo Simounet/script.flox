@@ -26,23 +26,18 @@ class Scrobbler:
 
         id = videoInfoTag.getDbId()
 
-        username = self.__addon__.getSettingString('floxUsername')
-        password = self.__addon__.getSettingString('floxPassword')
+        token = self.__addon__.getSettingString('floxToken')
         url = self.__addon__.getSettingString('floxUrl')
 
-        if len(username) == 0:
-            xbmc.log("Flox: missing username", xbmc.LOGDEBUG)
-            return
-
-        if len(password) == 0:
-            xbmc.log("Flox: missing password", xbmc.LOGDEBUG)
+        if len(token) == 0:
+            xbmc.log("Flox: missing token", xbmc.LOGDEBUG)
             return
 
         if len(url) == 0:
             xbmc.log("Flox: missing Flox url", xbmc.LOGDEBUG)
             return
 
-        flox = Flox(url, username, password)
+        flox = Flox(url, token)
 
         duration = videoInfoTag.getDuration()
         currentTime = player.getTime()
@@ -88,7 +83,7 @@ class Scrobbler:
 
                 flox.markAsSeen({
                     "mediaType": "tv",
-                    "id": {
+                    "ids": {
                         "imdbId": imdbId,
                         "tmdbId": tmdbId
                     },
@@ -115,7 +110,7 @@ class Scrobbler:
 
                 flox.markAsSeen({
                     "mediaType": "movie",
-                    "id": {
+                    "ids": {
                         "imdbId": imdbId,
                         "tmdbId": tmdbId
                     },

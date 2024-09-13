@@ -13,7 +13,7 @@ class ExternalId(TypedDict):
 
 class ProgressPayload(TypedDict):
     mediaType: Literal["movie", "tv"]
-    id: ExternalId
+    ids: ExternalId
     seasonNumber: int
     episodeNumber: int
     action: Literal["playing", "paused"]
@@ -22,23 +22,22 @@ class ProgressPayload(TypedDict):
 
 class MarkAsSeenPayload(TypedDict):
     mediaType: Literal["movie", "tv"]
-    id: ExternalId
+    ids: ExternalId
     seasonNumber: int
     episodeNumber: int
     duration: float
 
 class Flox:
-    def __init__(self, url: str, username: str, password: str) -> None:
+    def __init__(self, url: str, token: str) -> None:
         self.url = url
-        self.username = username
-        self.password = password
+        self.token = token
 
     def markAsSeen(self, payload: MarkAsSeenPayload):
         url = urllib.parse.urljoin(
-            self.url, '/api/episode/seen')
+            self.url, '/api/kodi')
 
         try:
-            putJson(url, self.username, self.password, payload)
+            post(url, self.token, payload)
             notify('Episode marked as seen', 'Episode marked as seen')
         except HTTPError as error:
             if error.status == 401:
@@ -48,7 +47,8 @@ class Flox:
             else:
                 notify('unknown error', 'Unknown error')
 
-def putJson(url: str, username: str, password: str, data: dict):
+def post(url: str, token: str, data: dict):
+    data['token'] = token
     postdata = json.dumps(data).encode()
 
     headers = {"Content-Type": "application/json; charset=UTF-8"}
@@ -57,16 +57,12 @@ def putJson(url: str, username: str, password: str, data: dict):
         url,
         data=postdata,
         headers=headers,
-        method="PUT")
-
-    credentials = f"{username}:{password}".encode('utf-8')
-    base64_credentials = base64.b64encode(credentials).decode('utf-8')
-    httprequest.add_header('Authorization', f'Basic {base64_credentials}')
+        method="POST")
 
     response = urllib.request.urlopen(httprequest)
 
 def notify(log: str, text: str):
     xbmc.log(
         f"Flox: {log}", xbmc.LOGINFO)
-    dialog = xbmcgui.Dialog()
-    dialog.notification('Flox', text, xbmcgui.NOTIFICATION_INFO, 10000)
+    # dialog = xbmcgui.Dialog()
+    # dialog.notification('Flox', text, xbmcgui.NOTIFICATION_INFO, 10000)
