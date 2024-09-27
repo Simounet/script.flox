@@ -82,6 +82,7 @@ class Scrobbler:
                     f"Flox: marking tv show \"{videoInfoTag.getTVShowTitle()}\" {seasonNumber}x{episodeNumber} as seen", xbmc.LOGDEBUG)
 
                 flox.markAsSeen({
+                    "version": self.__addon__.getAddonInfo('version'),
                     "mediaType": "tv",
                     "title": videoInfoTag.getTVShowTitle(),
                     "ids": {
@@ -110,6 +111,7 @@ class Scrobbler:
                     f"Flox: marking movie \"{videoInfoTag.getTitle()}\" as seen", xbmc.LOGDEBUG)
 
                 flox.markAsSeen({
+                    "version": self.__addon__.getAddonInfo('version'),
                     "mediaType": "movie",
                     "title": videoInfoTag.getTitle(),
                     "ids": {

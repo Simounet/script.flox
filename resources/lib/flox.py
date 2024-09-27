@@ -21,6 +21,7 @@ class ProgressPayload(TypedDict):
     duration: float
 
 class MarkAsSeenPayload(TypedDict):
+    version: str
     mediaType: Literal["movie", "tv"]
     title: str
     ids: ExternalId
