@@ -22,6 +22,7 @@ class ProgressPayload(TypedDict):
 
 class MarkAsSeenPayload(TypedDict):
     mediaType: Literal["movie", "tv"]
+    title: str
     ids: ExternalId
     seasonNumber: int
     episodeNumber: int

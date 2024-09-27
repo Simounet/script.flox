@@ -83,6 +83,7 @@ class Scrobbler:
 
                 flox.markAsSeen({
                     "mediaType": "tv",
+                    "title": videoInfoTag.getTVShowTitle(),
                     "ids": {
                         "imdbId": imdbId,
                         "tmdbId": tmdbId
@@ -110,6 +111,7 @@ class Scrobbler:
 
                 flox.markAsSeen({
                     "mediaType": "movie",
+                    "title": videoInfoTag.getTitle(),
                     "ids": {
                         "imdbId": imdbId,
                         "tmdbId": tmdbId
