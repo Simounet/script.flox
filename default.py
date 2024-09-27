@@ -8,7 +8,7 @@ scrobbler = Scrobbler()
 monitor = Monitor(scrobbler)
 
 while not monitor.abortRequested():
-    if monitor.waitForAbort(30):
+    if monitor.waitForAbort(5):
         break
 
     else:
