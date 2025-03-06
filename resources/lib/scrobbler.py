@@ -37,11 +37,15 @@ class Scrobbler:
             xbmc.log("Flox: missing Flox url", xbmc.LOGDEBUG)
             return
 
-        flox = Flox(url, token)
-
         duration = videoInfoTag.getDuration()
         currentTime = player.getTime()
+
+        if duration == 0 or currentTime == 0:
+            xbmc.log("Flox: duration -> " + str(duration) + " / currentTime -> " + str(currentTime), xbmc.LOGDEBUG)
+            return
+
         progress = currentTime / duration
+        flox = Flox(url, token)
 
         if videoInfoTag.getMediaType() == "episode":
             res = kodiJsonRequest('VideoLibrary.GetEpisodeDetails', {
